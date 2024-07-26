@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="center">
+    <h2>Messages Page</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send Message</button>
+    </form>
+
+    <h3>Your Messages</h3>
+    <ul>
+        {% for message in messages %}
+            <li>
+                <strong>{{ message.subject }}</strong><br>
+                {{ message.message }}<br>
+                <small>{{ message.created_at }}</small>
+            </li>
+        {% empty %}
+            <li>No messages yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock content %}
+
